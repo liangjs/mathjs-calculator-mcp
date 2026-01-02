@@ -1,4 +1,9 @@
 {
+  "license": "MIT",
+  "type": "module",
   "name": "calculator",
+  "scripts": {
+    "start": "node src/index.mjs"
+  },
   "packageManager": "yarn@4.9.2"
 }
