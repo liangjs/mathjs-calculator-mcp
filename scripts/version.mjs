@@ -31,11 +31,12 @@ const rootDir = join(__dirname, '..');
  */
 function exec(command, silent = false) {
   try {
-    return execSync(command, {
+    const result = execSync(command, {
       cwd: rootDir,
       encoding: 'utf8',
       stdio: silent ? 'pipe' : 'inherit'
-    }).trim();
+    });
+    return result ? result.trim() : '';
   } catch (error) {
     console.error(`Command failed: ${command}`);
     throw error;
