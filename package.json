@@ -1,9 +1,36 @@
 {
-  "license": "MIT",
+  "name": "@liangjs/mathjs-calculator-mcp",
+  "version": "1.0.0",
+  "description": "MCP server providing calculator functionality using mathjs",
+  "main": "src/index.mjs",
   "type": "module",
-  "name": "calculator",
+  "license": "MIT",
+  "author": "liangjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liangjs/mathjs-calculator-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "calculator",
+    "mathjs",
+    "model-context-protocol"
+  ],
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "start": "node src/index.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.1",
+    "mathjs": "^15.1.0",
+    "zod": "^4.3.4"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "packageManager": "yarn@4.9.2"
 }
