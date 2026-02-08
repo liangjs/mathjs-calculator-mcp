@@ -23,7 +23,9 @@
     "LICENSE"
   ],
   "scripts": {
-    "start": "node src/index.mjs"
+    "start": "node src/index.mjs",
+    "version:bump": "node scripts/version.mjs",
+    "version:check": "node -e \"console.log('Current version:', require('./package.json').version)\""
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.1",

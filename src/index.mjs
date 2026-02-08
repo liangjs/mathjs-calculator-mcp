@@ -4,6 +4,10 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { evaluate, format } from "mathjs";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
+const pkg = require("../package.json");
 
 // Display precision for calculation results (significant figures for decimals)
 const OUTPUT_PRECISION = 3;
@@ -62,7 +66,7 @@ function calculate(expression) {
 // Initialize MCP server
 const server = new McpServer({
   name: "calculator",
-  version: "1.0.0",
+  version: pkg.version,
 });
 
 // Register calculator tool
