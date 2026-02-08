@@ -3,11 +3,14 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { evaluate, format } from "mathjs";
 
+// Display precision for calculation results (significant figures for decimals)
+const OUTPUT_PRECISION = 3;
+
 // Calculator tool input schema
 const CalculatorInputSchema = z.object({
   expression: z
     .string()
-    .min(1, "计算表达式不能为空")
+    .min(1, "Expression cannot be empty")
     .describe(
       "Mathematical expression to evaluate. Supports basic arithmetic, functions, units, and more."
     ),
@@ -17,44 +20,40 @@ const CalculatorInputSchema = z.object({
  * Execute calculation using mathjs and format the result.
  *
  * @param {string} expression - Raw mathematical expression.
- * @returns {string} - Human readable calculation result.
+ * @returns {string} - Success: "Result: <expression> = <value>". Failure: "Calculation failed: <error message>".
  */
 function calculate(expression) {
   try {
     const cleanExpression = expression.trim();
 
-    if (!cleanExpression) {
-      throw new Error("计算表达式不能为空");
-    }
-
     // Evaluate expression using mathjs
     const result = evaluate(cleanExpression);
 
     // Format result
-    let formattedResult;
+    let displayValue;
 
     if (typeof result === "number") {
       // For numeric results, keep reasonable precision
       if (Number.isInteger(result)) {
-        formattedResult = result.toString();
+        displayValue = result.toString();
       } else {
-        formattedResult = Number(result.toPrecision(3)).toString();
+        displayValue = Number(result.toPrecision(OUTPUT_PRECISION)).toString();
       }
     } else if (typeof result === "object" && result !== null) {
       // For complex objects (matrices, complex numbers, etc.), use mathjs format
-      formattedResult = format(result, { precision: 3 });
+      displayValue = format(result, { precision: OUTPUT_PRECISION });
     } else {
-      formattedResult = String(result);
+      displayValue = String(result);
     }
 
-    return `计算结果: ${cleanExpression} = ${formattedResult}`;
+    return `Result: ${cleanExpression} = ${displayValue}`;
   } catch (error) {
     // Use console.error for visibility in server logs
     // eslint-disable-next-line no-console
     console.error("Calculation failed:", error);
     const message =
       error instanceof Error ? error.message : String(error ?? "Unknown error");
-    return `计算失败: ${message}`;
+    return `Calculation failed: ${message}`;
   }
 }
 
