@@ -28,6 +28,8 @@ __metadata:
     "@modelcontextprotocol/sdk": "npm:^1.25.1"
     mathjs: "npm:^15.1.0"
     zod: "npm:^4.3.4"
+  bin:
+    mathjs-calculator-mcp: src/index.mjs
   languageName: unknown
   linkType: soft
 

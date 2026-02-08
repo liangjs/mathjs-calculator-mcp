@@ -1,11 +1,9 @@
 {
   "name": "@liangjs/mathjs-calculator-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server providing calculator functionality using mathjs",
   "main": "src/index.mjs",
-  "bin": {
-    "mathjs-calculator-mcp": "src/index.mjs"
-  },
+  "bin": "src/index.mjs",
   "type": "module",
   "license": "MIT",
   "author": "liangjs",
